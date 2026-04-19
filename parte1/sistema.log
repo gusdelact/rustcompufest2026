@@ -1,0 +1,13 @@
+Servicio iniciado en puerto 8080
+Conexión aceptada desde 192.168.1.10
+ERROR disco lleno en /var/data
+Lectura completada: 1024 bytes
+WARN uso de memoria al 85%
+Conexión aceptada desde 10.0.0.5
+ERROR timeout en conexión con base de datos
+WARN certificado SSL expira en 7 días
+Respuesta enviada: 200 OK
+ERROR permiso denegado al escribir en /tmp/log
+Heartbeat recibido del nodo 3
+WARN latencia elevada: 320ms
+Conexión cerrada desde 192.168.1.10
