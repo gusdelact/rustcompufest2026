@@ -1,0 +1,29 @@
+[package]
+name = "parte4"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ctrlc = "3.4"
+signal-hook = "0.3"
+
+[[bin]]
+name = "01_simple_pipeline"
+path = "01_simple_pipeline.rs"
+
+[[bin]]
+name = "02_tres_pipeline"
+path = "02_tres_pipeline.rs"
+
+[[bin]]
+name = "03_pipeline_threads"
+path = "03_pipeline_threads.rs"
+
+[[bin]]
+name = "04_signals"
+path = "04_signals.rs"
+
+[[bin]]
+name = "05_signals_hilos"
+path = "05_signals_hilos.rs"
+
