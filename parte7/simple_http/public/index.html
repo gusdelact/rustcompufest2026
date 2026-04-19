@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple HTTPD - Rust</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #e07b39;
+            margin-bottom: 0.5rem;
+        }
+
+        h1 span {
+            color: #f5f5f5;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0a0b0;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .card h2 {
+            color: #e07b39;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            line-height: 1.7;
+            color: #c0c0d0;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature {
+            background: rgba(224, 123, 57, 0.1);
+            border: 1px solid rgba(224, 123, 57, 0.2);
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .feature .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature h3 {
+            color: #e07b39;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .feature p {
+            font-size: 0.85rem;
+            color: #a0a0b0;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 1.2rem;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            text-align: left;
+            color: #c9d1d9;
+        }
+
+        .code-block .keyword {
+            color: #ff7b72;
+        }
+
+        .code-block .function {
+            color: #d2a8ff;
+        }
+
+        .code-block .string {
+            color: #a5d6ff;
+        }
+
+        .code-block .comment {
+            color: #8b949e;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(46, 160, 67, 0.15);
+            border: 1px solid rgba(46, 160, 67, 0.3);
+            border-radius: 20px;
+            padding: 0.5rem 1.2rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+
+        .status .dot {
+            width: 10px;
+            height: 10px;
+            background: #2ea043;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: #606070;
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: #e07b39;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🦀</div>
+        <h1>Simple <span>HTTPD</span></h1>
+        <p class="subtitle">Un servidor HTTP ligero escrito en Rust</p>
+
+        <div class="status">
+            <span class="dot"></span>
+            Servidor activo y funcionando
+        </div>
+
+        <div class="card">
+            <h2>¿Qué es Simple HTTPD?</h2>
+            <p>
+                Es un servidor HTTP minimalista construido desde cero en Rust, diseñado para servir
+                archivos estáticos de forma rápida y segura. Aprovecha las garantías de seguridad de
+                memoria de Rust y su modelo de concurrencia sin data races para ofrecer un servidor
+                confiable y eficiente.
+            </p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="icon">⚡</div>
+                <h3>Rápido</h3>
+                <p>Rendimiento nativo sin garbage collector</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🔒</div>
+                <h3>Seguro</h3>
+                <p>Memory safety garantizada por el compilador</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🪶</div>
+                <h3>Ligero</h3>
+                <p>Mínimo uso de recursos del sistema</p>
+            </div>
+            <div class="feature">
+                <div class="icon">🔧</div>
+                <h3>Simple</h3>
+                <p>Fácil de configurar y ejecutar</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Inicio rápido</h2>
+            <div class="code-block">
+                <span class="comment">// Compilar y ejecutar</span><br>
+                $ <span class="function">cargo</span> build --release<br>
+                $ <span class="function">./target/release/simple-httpd</span> <span class="string">--port 8080</span> <span class="string">--root ./public</span><br><br>
+                <span class="comment">// O directamente con cargo</span><br>
+                $ <span class="function">cargo</span> run -- <span class="string">--port 8080</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Ejemplo de código</h2>
+            <div class="code-block">
+                <span class="keyword">use</span> std::net::TcpListener;<br>
+                <span class="keyword">use</span> std::io::prelude::*;<br><br>
+                <span class="keyword">fn</span> <span class="function">main</span>() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">let</span> listener = TcpListener::<span class="function">bind</span>(<span class="string">"127.0.0.1:8080"</span>).<span class="function">unwrap</span>();<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">println!</span>(<span class="string">"Servidor escuchando en puerto 8080"</span>);<br><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> stream <span class="keyword">in</span> listener.<span class="function">incoming</span>() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="function">handle_connection</span>(stream.<span class="function">unwrap</span>());<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                }
+            </div>
+        </div>
+
+        <footer>
+            <p>Hecho con 🦀 y ❤️ en Rust &mdash; <a href="https://www.rust-lang.org" target="_blank" rel="noopener noreferrer">rust-lang.org</a></p>
+        </footer>
+    </div>
+</body>
+</html>
