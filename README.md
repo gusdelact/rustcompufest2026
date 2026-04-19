@@ -176,3 +176,11 @@ Idea clave para el taller
 
 Un handle de recurso no es solo un dato.
 Es un valor que representa una relación viva con el sistema operativo.
+
+### En resúmen
+Lan programación de sistemas, casi todo se construye con cuatro piezas fundamentales.
+- Primero, buffers de bytes, porque el sistema operativo entrega y recibe datos como bytes.
+- Luego, texto, porque muchas veces esos bytes representan líneas, comandos, rutas o logs.
+- Después, estado, porque el programa necesita recordar en qué situación está y qué ha pasado hasta ahora.
+- Y finalmente, handles de recurso, porque el programa no vive solo en memoria: abre archivos, usa sockets, lanza procesos y trabaja con recursos del sistema operativo.  
+Rust no inventa esas cuatro piezas; lo que hace es volverlas más explícitas, más seguras y más claras.
